@@ -1,5 +1,6 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+// import logo from './logo.svg';
 
 // React Intro exercise
 // function App() {
@@ -30,11 +31,42 @@ import './App.css';
 //   );
 // }
 
-class App extends React.Component {
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      list: ["ready", "set", "GO"],
+      text: "",
+    };
+    this.onSubmit = this.onSubmit.bind(this)
+  }
+  onSubmit(event){
+    event.preventDefault()
+    let newList = [this.state.list, this.state.text]
+    this.setState()
+  }
   render() {
     return (
       <div>
         <h1>Hello World</h1>
+        <form onSubmit={this.onSubmit}>
+          <input 
+          type="text" 
+          name="text"
+          id="text"
+          value={this.state.text}
+          onChange={(event) => 
+            this.setState({
+              newList: this.state.text,
+            })}/>
+              <button type="submit" text="add">Submit</button>
+        </form>
+        <ul>
+          <li>{this.state.list.map((item, index) => {
+            return <li key={index}> {item} </li>
+          }
+          )}</li>
+        </ul>
       </div>
     );
   }
