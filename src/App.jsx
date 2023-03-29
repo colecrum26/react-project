@@ -42,14 +42,17 @@ class App extends Component {
   }
   onSubmit(event){
     event.preventDefault()
-    let newList = [this.state.list, this.state.text]
-    this.setState()
+    let newList = [...this.state.list, this.state.text]
+    this.setState({
+      list: newList,
+      text: "",
+    })
   }
   render() {
     return (
       <div>
         <h1>Hello World</h1>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit = {this.onSubmit}>
           <input 
           type="text" 
           name="text"
@@ -57,7 +60,7 @@ class App extends Component {
           value={this.state.text}
           onChange={(event) => 
             this.setState({
-              newList: this.state.text,
+              text: event.target.value,
             })}/>
               <button type="submit" text="add">Submit</button>
         </form>
