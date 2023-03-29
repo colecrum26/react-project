@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import FilmsList from './components/filmsList';
 // import logo from './logo.svg';
 
 // React Intro exercise
@@ -70,6 +71,7 @@ class App extends Component {
           }
           )}</li>
         </ul>
+        <FilmsList/>
       </div>
     );
   }
