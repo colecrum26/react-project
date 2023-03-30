@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import './App.css';
-import FilmsList from './components/filmsList';
+import React, { useState } from "react";
+import "./App.css";
+import FilmsList from "./components/filmsList";
 // import logo from './logo.svg';
 
 // React Intro exercise
@@ -32,49 +32,41 @@ import FilmsList from './components/filmsList';
 //   );
 // }
 
-class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      list: ["ready", "set", "GO"],
-      text: "",
-    };
-    this.onSubmit = this.onSubmit.bind(this)
-  }
-  onSubmit(event){
-    event.preventDefault()
-    let newList = [...this.state.list, this.state.text]
-    this.setState({
-      list: newList,
-      text: "",
-    })
-  }
-  render() {
-    return (
-      <div>
-        <h1>Hello World</h1>
-        <form onSubmit = {this.onSubmit}>
-          <input 
-          type="text" 
+function App(props) {
+  const [list, setList] = useState(["ready", "set", "GO"]);
+  const [text, setText] = useState("");
+  let onSubmit = (event) => {
+    event.preventDefault();
+    let newList = [...list, text];
+    setList(newList);
+    setText("");
+  };
+
+  return (
+    <div>
+      <h1>Hello World</h1>
+      <form onSubmit={onSubmit}>
+        <input
+          type="text"
           name="text"
           id="text"
-          value={this.state.text}
-          onChange={(event) => 
-            this.setState({
-              text: event.target.value,
-            })}/>
-              <button type="submit" text="add">Submit</button>
-        </form>
-        <ul>
-          <li>{this.state.list.map((item, index) => {
-            return <li key={index}> {item} </li>
-          }
-          )}</li>
-        </ul>
-        <FilmsList/>
-      </div>
-    );
-  }
+          value={text}
+          onChange={(e) => {
+            setText(e.target.value);
+          }}
+        />
+        <button type="submit" text="add">
+          Submit
+        </button>
+      </form>
+      <ul>
+          {list.map((item, index) => {
+            return <li key={index}> {item} </li>;
+          })}
+      </ul>
+      <FilmsList />
+    </div>
+  );
 }
 
 export default App;
