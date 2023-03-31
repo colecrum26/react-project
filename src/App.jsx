@@ -11,8 +11,8 @@ function App(props) {
         <Route path="/films" element={<FilmsPage />}></Route>
       </Routes>
       <nav>
-        <li><NavLink to="/">HOME</NavLink></li>
-        <li><NavLink to="/films">FILMS</NavLink></li>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/films">Films</NavLink></li>
       </nav>
     </Router>
   );
