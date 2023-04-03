@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function FilmsPage(props) {
   const [list, setList] = useState([]);
-  const [searchDirector, setSearchDirector] = useState([]);
+  const [searchDirector, setSearchDirector] = useState("");
 
   function getFilms() {
     fetch("https://studioghibliapi-d6fc8.web.app/films")
@@ -22,7 +22,7 @@ function FilmsPage(props) {
   }
   let filmsByDirector = filterFilmsByDirector(list, searchDirector);
   let directors = getListOf(list, "director")
-  let film = getFilmStats(list);
+  let film = getFilmStats(filmsByDirector);
 
   useEffect(() => {
     getFilms();
@@ -32,7 +32,6 @@ function FilmsPage(props) {
   return (
     <div>
         <h1>Studio Ghibli Films</h1>
-    <ul>
         <form>
             <div class="form-group">
             <label htmlFor="searchDirector">Search Director</label>
@@ -54,19 +53,18 @@ function FilmsPage(props) {
         </form>
         <div>
   <div>
-    <span># Of Films</span>
+    <span># Of Films: </span>
     <span>{film.total}</span>
   </div>
   <div>
-    <span>Average Rating</span>
+    <span>Average Rating: </span>
     <span>{film.avg_score.toFixed(2)}</span>
   </div>
   <div>
-    <span>Latest Film</span>
+    <span>Latest Film: </span>
     <span>{film.latest}</span>
   </div>
 </div>
-    </ul>
     <ul>
         {filmsByDirector.map((film) => {
             return <li key={film.id}> 
