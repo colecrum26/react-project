@@ -23,7 +23,7 @@ function FilmsPage(props) {
   let filmsByDirector = filterFilmsByDirector(list, searchDirector);
   let directors = getListOf(list, "director")
   let film = getFilmStats(list);
-  
+
   useEffect(() => {
     getFilms();
   }, []);

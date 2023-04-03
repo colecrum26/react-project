@@ -27,7 +27,7 @@ let avg_score = acc / list.length;
 let latest = 0;
 list.forEach((film) => {
     if (latest < film.release_date){
-        latest = film.release_date;
+        latest == film.release_date;
     }
 });
 
