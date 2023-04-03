@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { filterFilmsByDirector, getListOf } from "../helpers/film.helpers" ;
+import { filterFilmsByDirector, getListOf, getFilmStats } from "../helpers/film.helpers" ;
 import { Link } from "react-router-dom";
 
 
@@ -20,12 +20,14 @@ function FilmsPage(props) {
         console.error(err);
       });
   }
+  let filmsByDirector = filterFilmsByDirector(list, searchDirector);
+  let directors = getListOf(list, "director")
+  let film = getFilmStats(list);
+  
   useEffect(() => {
     getFilms();
   }, []);
 
-  let filmsByDirector = filterFilmsByDirector(list, searchDirector);
-  let directors = getListOf(list, "director")
 
   return (
     <div>
@@ -50,11 +52,25 @@ function FilmsPage(props) {
             </select>
             </div>
         </form>
+        <div>
+  <div>
+    <span># Of Films</span>
+    <span>{film.total}</span>
+  </div>
+  <div>
+    <span>Average Rating</span>
+    <span>{film.avg_score.toFixed(2)}</span>
+  </div>
+  <div>
+    <span>Latest Film</span>
+    <span>{film.latest}</span>
+  </div>
+</div>
     </ul>
     <ul>
         {filmsByDirector.map((film) => {
             return <li key={film.id}> 
-            <h2><Link to={`film/${film.id}`} /> </h2>
+            <Link to={`/film/${film.id}`} ><h5>{film.title}</h5></Link>
             <img src={film.image} alt="movie photo"/>
                 </li>
         })}
